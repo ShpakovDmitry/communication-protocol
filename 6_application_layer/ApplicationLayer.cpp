@@ -8,6 +8,7 @@
 
 #include <vector>
 #include <cstdint>
+#include <string>
 #include <PresentationLayer.hpp>
 #include "ApplicationLayer.hpp"
 
@@ -27,7 +28,11 @@ std::vector<uint8_t> ApplicationLayer::receive(void) {
 
 std::vector<uint8_t> ApplicationLayer::addHeaders(const std::vector<uint8_t> &data) {
   /* implementaion goes here */
-  return data;
+  std::vector<uint8_t> packet = data;
+  std::string header = ":L6:";
+  packet.insert(packet.begin(), header.begin(), header.end());
+  packet.insert(packet.end(), header.begin(), header.end());
+  return packet;
 }
 
 std::vector<uint8_t> ApplicationLayer::removeHeaders(const std::vector<uint8_t> &frame) {

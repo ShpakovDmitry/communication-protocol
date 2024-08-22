@@ -8,6 +8,8 @@
 
 #include <vector>
 #include <cstdint>
+#include <iostream>
+#include <string>
 #include <ProtocolStack.hpp>
 
 int main(int argc, char **argv) {
@@ -15,7 +17,8 @@ int main(int argc, char **argv) {
   (void)argv;
   ProtocolStack protocol;
 
-  std::vector<uint8_t> dataToSend = { /* your data */ };
+  std::string str = "TOP SECRET";
+  std::vector<uint8_t> dataToSend(str.begin(), str.end());
   protocol.send(dataToSend);
 
   std::vector<uint8_t> receivedData = protocol.receive();

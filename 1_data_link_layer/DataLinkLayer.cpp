@@ -8,6 +8,7 @@
 
 #include <vector>
 #include <cstdint>
+#include <string>
 #include <PhysicalLayer.hpp>
 #include "DataLinkLayer.hpp"
 
@@ -28,7 +29,11 @@ std::vector<uint8_t> DataLinkLayer::receive(void) {
 
 std::vector<uint8_t> DataLinkLayer::addHeaders(const std::vector<uint8_t> &data) {
   /* implementaion goes here */
-  return data;
+  std::vector<uint8_t> packet = data;
+  std::string header = ":L1:";
+  packet.insert(packet.begin(), header.begin(), header.end());
+  packet.insert(packet.end(), header.begin(), header.end());
+  return packet;
 }
 
 std::vector<uint8_t> DataLinkLayer::removeHeaders(const std::vector<uint8_t> &frame) {

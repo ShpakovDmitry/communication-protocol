@@ -8,16 +8,25 @@
 
 #include <vector>
 #include <cstdint>
+#include <iostream>
 #include "PhysicalLayer.hpp"
 
 void PhysicalLayer::send(const std::vector<uint8_t> &data) {
   /* implementation goes here */
-  (void)data;
+  std::vector<uint8_t> packet = data;
+  std::string header = ":L0:";
+  packet.insert(packet.begin(), header.begin(), header.end());
+  packet.insert(packet.end(), header.begin(), header.end());
+  for (uint8_t i: packet) {
+    std::cout << static_cast<char>(i);
+  }
+  std::cout << std::endl;
 }
 
 std::vector<uint8_t> PhysicalLayer::receive(void) {
   /* implementation goes here */
-  std::vector<uint8_t> data = {};
+  std::string rawData = "Hello";
+  std::vector<uint8_t> data(rawData.begin(), rawData.end());
   return data;
 }
 

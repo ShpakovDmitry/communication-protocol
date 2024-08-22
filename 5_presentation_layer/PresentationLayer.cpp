@@ -8,6 +8,7 @@
 
 #include <vector>
 #include <cstdint>
+#include <string>
 #include <SessionLayer.hpp>
 #include "PresentationLayer.hpp"
 
@@ -27,7 +28,11 @@ std::vector<uint8_t> PresentationLayer::receive(void) {
 
 std::vector<uint8_t> PresentationLayer::addHeaders(const std::vector<uint8_t> &data) {
   /* implementaion goes here */
-  return data;
+  std::vector<uint8_t> packet = data;
+  std::string header = ":L5:";
+  packet.insert(packet.begin(), header.begin(), header.end());
+  packet.insert(packet.end(), header.begin(), header.end());
+  return packet;
 }
 
 std::vector<uint8_t> PresentationLayer::removeHeaders(const std::vector<uint8_t> &frame) {
